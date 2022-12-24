@@ -1,12 +1,12 @@
 package exercise;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 // BEGIN
 public final class App {
     public static boolean scrabble(String chars, String word) {
-        List<String> charList = new LinkedList<>();
+        List<String> charList = new ArrayList<>();
 
         for (var c : chars.split("")) {
             charList.add(c.toLowerCase());
