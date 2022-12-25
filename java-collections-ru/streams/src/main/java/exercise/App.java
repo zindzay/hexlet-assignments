@@ -8,15 +8,12 @@ public final class App {
 
     public static Long getCountOfFreeEmails(List<String> emails) {
         return emails.stream()
-                .filter(App::isFree)
+                .map(App::toDomain)
+                .filter(FREE_DOMAINS::contains)
                 .count();
     }
 
-    public static Boolean isFree(String email) {
-        return FREE_DOMAINS.contains(getDomain(email));
-    }
-
-    public static String getDomain(String email) {
+    public static String toDomain(String email) {
         return email.split("@")[1];
     }
 }
