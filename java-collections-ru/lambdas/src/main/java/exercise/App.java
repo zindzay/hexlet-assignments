@@ -18,7 +18,7 @@ public final class App {
     }
 
     private static <T> List<T> scale(List<T> elements, int ratio) {
-        List<T> scaled = new ArrayList<>(elements.size() * ratio);
+        final List<T> scaled = new ArrayList<>(elements.size() * ratio);
 
         for (var element : elements) {
             for (var j = 0; j < ratio; j++) {
