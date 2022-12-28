@@ -1,10 +1,8 @@
 package exercise;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -20,19 +18,7 @@ public final class Sorter {
     }
 
     private static final Comparator<Map<String, String>> SORT_BY_DATE =
-            (Map<String, String> a, Map<String, String> b) -> {
-                final var formatter = DateTimeFormatter.ofPattern("yyyy-L-dd", Locale.ENGLISH);
-                final var dateKey = "birthday";
-
-                if (LocalDate.parse(a.get(dateKey), formatter).isBefore(LocalDate.parse(b.get(dateKey), formatter))) {
-                    return -1;
-                } else if (LocalDate.parse(a.get(dateKey), formatter)
-                        .isAfter(LocalDate.parse(b.get(dateKey), formatter))) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            };
+            Comparator.comparing((Map<String, String> user) -> LocalDate.parse(user.get("birthday")));
     private static final Predicate<Map<String, String>> IS_MALE =
             (Map<String, String> user) -> "male".equals(user.get("gender"));
     private static final Function<Map<String, String>, String> GET_NAME =
