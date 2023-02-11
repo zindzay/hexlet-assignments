@@ -31,17 +31,18 @@ class FileKVTest {
     // BEGIN
     @Test
     void fileKVTest() {
-        KeyValueStorage storage = new FileKV(filepath.toString());
-
-        storage.set("key2", "value2");
-        storage.set("key", "value");
-
-        assertThat(storage.get("key2", "default")).isEqualTo("value2");
+        KeyValueStorage storage = new FileKV(filepath.toString(), Map.of("key", "value"));
+        assertThat(storage.get("key2", "default")).isEqualTo("default");
         assertThat(storage.get("key", "default")).isEqualTo("value");
+
+        storage.set("key3", "value3");
+        storage.set("key", "10");
+        assertThat(storage.get("key3", "default")).isEqualTo("value3");
+        assertThat(storage.get("key", "default")).isEqualTo("10");
 
         storage.unset("key");
         assertThat(storage.get("key", "def")).isEqualTo("def");
-        assertThat(storage.toMap()).isEqualTo(Map.of("key2", "value2"));
 
+        assertThat(storage.toMap()).isEqualTo(Map.of("key3", "value3"));
     }
 }
