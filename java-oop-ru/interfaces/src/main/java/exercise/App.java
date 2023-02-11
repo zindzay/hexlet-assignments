@@ -1,14 +1,13 @@
 package exercise;
 
-import java.util.Comparator;
 import java.util.List;
 
 // BEGIN
 public class App {
-    public static List<String> buildApartmentsList(List<Home> homes, int n) {
+    public static List<String> buildApartmentsList(List<Home> homes, int count) {
         return homes.stream()
-                .sorted(Comparator.comparingDouble(Home::getArea))
-                .limit(n)
+                .sorted(Home::compareTo)
+                .limit(count)
                 .map(Home::toString)
                 .toList();
     }
