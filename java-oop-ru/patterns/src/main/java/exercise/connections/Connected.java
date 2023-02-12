@@ -4,29 +4,28 @@ import exercise.TcpConnection;
 
 // BEGIN
 public final class Connected implements Connection {
-    private final TcpConnection tcpConnection;
+    private final TcpConnection connection;
 
-    public Connected(TcpConnection tcpConnection) {
-        this.tcpConnection = tcpConnection;
+    public Connected(TcpConnection connection) {
+        this.connection = connection;
     }
 
     @Override
     public void connect() {
-        System.out.println("Error! Already connected");
+        System.out.println("Error! Connection has established already");
     }
 
     @Override
     public void disconnect() {
-        System.out.println("disconnecting...");
-        this.tcpConnection.setState(new Disconnected(this.tcpConnection));
+        this.connection.setState(new Disconnected(this.connection));
     }
 
     @Override
     public void write(String data) {
-        System.out.println(String.format("Sending data: %s", data));
+        connection.addToBuffer(data);
     }
 
-    public String getCurrentState() {
+    public String getName() {
         return "connected";
     }
 }

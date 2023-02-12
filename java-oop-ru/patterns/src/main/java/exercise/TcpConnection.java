@@ -3,11 +3,15 @@ package exercise;
 import exercise.connections.Connection;
 import exercise.connections.Disconnected;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // BEGIN
 public final class TcpConnection {
-    private final String ip;
-    private final int port;
+    private String ip;
+    private int port;
     private Connection state;
+    private List<String> buffer = new ArrayList<>();
 
     public TcpConnection(String ip, int port) {
         this.ip = ip;
@@ -16,7 +20,7 @@ public final class TcpConnection {
     }
 
     public String getCurrentState() {
-        return state.getCurrentState();
+        return this.state.getName();
     }
 
     public void connect() {
@@ -31,12 +35,12 @@ public final class TcpConnection {
         state.write(data);
     }
 
-    public void setState(Connection state) {
-        this.state = state;
+    public void addToBuffer(String data) {
+        buffer.add(data);
     }
 
-    public Connection getState() {
-        return state;
+    public void setState(Connection state) {
+        this.state = state;
     }
 }
 // END
