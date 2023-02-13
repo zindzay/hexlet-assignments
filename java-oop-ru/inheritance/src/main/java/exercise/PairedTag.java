@@ -13,8 +13,6 @@ public final class PairedTag extends Tag {
         this.body = body;
     }
 
-    // "<p id="abc">Text paragraph</p>"
-    // "<div class="y-5"><br id="s"><hr class="a-5"></div>"
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
