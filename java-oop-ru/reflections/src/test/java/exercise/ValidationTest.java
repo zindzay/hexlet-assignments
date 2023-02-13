@@ -33,8 +33,14 @@ class ValidationTest {
     void advancedValidate() {
         Address address = new Address("USA", "Texas", null, "7", "2");
         Map<String, List<String>> notValidFields = Validator.advancedValidate(address);
-        assertThat(notValidFields).containsEntry("country", List.of("length less than 4"));
-        assertThat(notValidFields).containsEntry("street", List.of("can not be null"));
+        assertThat(notValidFields)
+                .containsEntry("street", List.of("can not be null"))
+                .containsEntry("country", List.of("length less than 4"));
+
+        Address address1 = new Address("Russia", "Ufa", "Lenina", "54", null);
+        Map<String, List<String>> result1 = Validator.advancedValidate(address1);
+        Map<String, List<String>> expected1 = Map.of();
+        assertThat(result1).isEqualTo(expected1);
     }
     // END
 }
