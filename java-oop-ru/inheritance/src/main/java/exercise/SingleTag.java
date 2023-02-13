@@ -10,17 +10,7 @@ public final class SingleTag extends Tag {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("<%s", getName()));
-
-        for (var attribute : getAttributes().entrySet()) {
-            sb.append(String.format(" %s=\"%s\"", attribute.getKey(), attribute.getValue()));
-        }
-
-        sb.append(">");
-
-        return sb.toString();
+        return String.format("<%s%s>", getName(), stringifyAttributes());
     }
 }
 // END

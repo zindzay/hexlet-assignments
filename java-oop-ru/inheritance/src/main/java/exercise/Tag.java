@@ -3,7 +3,7 @@ package exercise;
 import java.util.Map;
 
 // BEGIN
-public abstract class Tag {
+public class Tag {
     private final String name;
     private final Map<String, String> attributes;
 
@@ -18,6 +18,16 @@ public abstract class Tag {
 
     public Map<String, String> getAttributes() {
         return attributes;
+    }
+
+    protected String stringifyAttributes() {
+        final StringBuilder sb = new StringBuilder();
+
+        for (var attribute : getAttributes().entrySet()) {
+            sb.append(String.format(" %s=\"%s\"", attribute.getKey(), attribute.getValue()));
+        }
+
+        return sb.toString();
     }
 }
 // END
