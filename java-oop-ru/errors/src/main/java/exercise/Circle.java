@@ -2,11 +2,11 @@ package exercise;
 
 // BEGIN
 public final class Circle {
-    private final Point point;
+    private final Point center;
     private final int radius;
 
-    public Circle(Point point, int radius) {
-        this.point = point;
+    public Circle(Point center, int radius) {
+        this.center = center;
         this.radius = radius;
     }
 
@@ -16,10 +16,10 @@ public final class Circle {
 
     public double getSquare() throws NegativeRadiusException {
         if (radius < 0) {
-            throw new NegativeRadiusException();
+            throw new NegativeRadiusException("Radius can not be negative");
         }
 
-        return Math.PI * radius * radius;
+        return Math.PI * Math.pow(radius, 2);
     }
 }
 // END
