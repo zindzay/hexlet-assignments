@@ -26,8 +26,8 @@ public class App {
         Context ctx = app.addContext("", new File(".").getAbsolutePath());
 
         // BEGIN
-        Tomcat.addServlet(ctx, "WelcomeServlet", new WelcomeServlet());
-        ctx.addServletMappingDecoded("/", "WelcomeServlet");
+        Tomcat.addServlet(ctx, WelcomeServlet.class.getSimpleName(), new WelcomeServlet());
+        ctx.addServletMappingDecoded("/", WelcomeServlet.class.getSimpleName());
         // END
 
         return app;
