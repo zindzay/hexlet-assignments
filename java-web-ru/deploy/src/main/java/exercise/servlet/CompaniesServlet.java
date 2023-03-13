@@ -17,22 +17,18 @@ public class CompaniesServlet extends HttpServlet {
 
         // BEGIN
         var companies = getCompanies();
-        var searchString = request.getParameter("search");
-        var writer = response.getWriter();
+        var searchString = request.getParameter("search") == null
+                ? ""
+                : request.getParameter("search");
+        var out = response.getWriter();
+        var filteredCompanies = companies.stream().filter(company -> company.contains(searchString)).toList();
 
-        if (searchString == null || searchString.isEmpty()) {
-            companies.forEach(writer::println);
+        if (filteredCompanies.isEmpty()) {
+            out.println("Companies not found");
             return;
         }
 
-        var foundCompanies = companies.stream().filter(company -> company.contains(searchString)).toList();
-
-        if (foundCompanies.isEmpty()) {
-            writer.println("Companies not found");
-            return;
-        }
-
-        foundCompanies.forEach(writer::println);
+        filteredCompanies.forEach(out::println);
         // END
     }
 }
