@@ -75,21 +75,30 @@ public class UsersServlet extends HttpServlet {
     private String createUserTableHtml(List<User> users) {
         var sb = new StringBuilder();
 
-        sb.append("<table>");
+        sb.append("""
+                <table class=\"table\"><tbody>
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">User</th>
+                      <th scope="col">Email</th>
+                    </tr>
+                  </thead>
+                """);
         for (var user : users) {
             sb.append(createUserTableRowHtml(user));
         }
-        sb.append("</table>");
+        sb.append("</tbody></table>");
 
         return sb.toString();
     }
 
     private String createUserLinkHtml(User user) {
-        return "<a href=\"/users/" + user.id() + ">" + user.firstName() + " " + user.lastName() + "</a>";
+        return "<a href=\"/users/" + user.id() + "\">" + user.firstName() + " " + user.lastName() + "</a>";
     }
 
     private String createUserTableRowHtml(User user) {
-        return "<tr><td>" + user.id() + "</td>"
+        return "<tr><th scope=\"row\">" + user.id() + "</th>"
                 + "<td>" + createUserLinkHtml(user) + "</td>"
                 + "<td>" + user.email() + "</td></tr>";
     }
@@ -109,7 +118,7 @@ public class UsersServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         var out = response.getWriter();
-        out.println(createUserTableHtml(List.of(user)));
+        out.println(HTML_HEADER + createUserTableHtml(List.of(user)) + HTML_FOOTER);
         // END
     }
 }
