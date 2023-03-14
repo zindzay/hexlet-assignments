@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class UsersServlet extends HttpServlet {
@@ -55,7 +56,11 @@ public class UsersServlet extends HttpServlet {
     private List<User> getUsers() throws JsonProcessingException, IOException {
         // BEGIN
         var mapper = new ObjectMapper();
-        return mapper.readValue(new File("src/main/resources/users.json"), new TypeReference<>() {
+        var uri = Paths.get("src", "main", "resources", "users.json")
+                .toAbsolutePath()
+                .normalize()
+                .toUri();
+        return mapper.readValue(new File(uri), new TypeReference<>() {
         });
         // END
     }
