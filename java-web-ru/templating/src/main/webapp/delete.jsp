@@ -19,6 +19,7 @@
     <form action='/users/delete?id=${user.get("id")}' method="post">
         <button type="submit" class="btn btn-danger">Удалить</button>
     </form>
+</div>
 </body>
 </html>
 <!-- END -->
