@@ -12,31 +12,13 @@
           crossorigin="anonymous">
 </head>
 <body>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">User</th>
-        <th scope="col">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="user" items="${users}">
-        <tr>
-            <th scope="row">${user.get("id")}</th>
-            <td>
-                    ${user.get("firstName")} ${user.get("lastName")}
-            </td>
-            <td>${user.get("email")}</td>
-            <td>
-                <form action='/users/delete?id=${user.get("id")}' method="post">
-                    <button type="submit" class="btn btn-danger">Удалить</button>
-                </form>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+<div class="container">
+    <a href="/users">Все пользователи</a>
+    <p>Уверены, что хотите удалить пользователя ${user.get("firstName")} ${user.get("lastName")} ?</p>
+
+    <form action='/users/delete?id=${user.get("id")}' method="post">
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
 </body>
 </html>
 <!-- END -->

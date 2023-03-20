@@ -12,16 +12,17 @@
           crossorigin="anonymous">
 </head>
 <body>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">User</th>
-        <th scope="col">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="user" items="${users}">
+<div class="container">
+    <a href="/users">Все пользователи</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr>
             <th scope="row">${user.get("id")}</th>
             <td>
@@ -32,9 +33,9 @@
                 <a href='/users/delete?id=${user.get("id")}'>Удалить</a>
             </td>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
 <!-- END -->

@@ -12,26 +12,29 @@
           crossorigin="anonymous">
 </head>
 <body>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">User</th>
-        <th scope="col">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="user" items="${users}">
+<div class="container">
+    <a href="/">Главная</a>
+    <table class="table">
+        <thead>
         <tr>
-            <th scope="row">${user.get("id")}</th>
-            <td>
-                <a href='/users/show?id=${user.get("id")}'>${user.get("firstName")} ${user.get("lastName")}</a>
-            </td>
-            <td>${user.get("email")}</td>
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Email</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach var="user" items="${users}">
+            <tr>
+                <th scope="row">${user.get("id")}</th>
+                <td>
+                    <a href='/users/show?id=${user.get("id")}'>${user.get("firstName")} ${user.get("lastName")}</a>
+                </td>
+                <td>${user.get("email")}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
 <!-- END -->

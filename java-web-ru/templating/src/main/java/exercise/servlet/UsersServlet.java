@@ -95,7 +95,7 @@ public class UsersServlet extends HttpServlet {
             return;
         }
         // BEGIN
-        request.setAttribute("users", List.of(user));
+        request.setAttribute("user", user);
         var requestDispatcher = request.getRequestDispatcher("/show.jsp");
         requestDispatcher.forward(request, response);
         // END
@@ -114,7 +114,7 @@ public class UsersServlet extends HttpServlet {
             return;
         }
         // BEGIN
-        request.setAttribute("users", List.of(user));
+        request.setAttribute("user", user);
         var requestDispatcher = request.getRequestDispatcher("/delete.jsp");
         requestDispatcher.forward(request, response);
         // END
