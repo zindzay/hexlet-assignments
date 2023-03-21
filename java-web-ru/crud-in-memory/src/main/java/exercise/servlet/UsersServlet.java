@@ -149,7 +149,7 @@ public class UsersServlet extends HttpServlet {
         user.put("lastName", lastName);
         user.put("email", email);
 
-        if ("".equals(firstName) || "".equals(lastName)) {
+        if (firstName.isEmpty() || lastName.isEmpty()) {
             final var requestDispatcher = request.getRequestDispatcher("/new.jsp");
             request.setAttribute("user", user);
             response.setStatus(422);
@@ -202,19 +202,22 @@ public class UsersServlet extends HttpServlet {
         final var lastName = request.getParameter("lastName");
         final var email = request.getParameter("email");
 
-        if ("".equals(firstName) || "".equals(lastName)) {
+        Map<String, String> updatedUserData = new HashMap<>();
+        updatedUserData.put("id", id);
+        updatedUserData.put("firstName", firstName);
+        updatedUserData.put("lastName", lastName);
+        updatedUserData.put("email", email);
+
+        if (firstName.isEmpty() || lastName.isEmpty()) {
             final var requestDispatcher = request.getRequestDispatcher("/edit.jsp");
-            request.setAttribute("user", user);
+            request.setAttribute("user", updatedUserData);
             response.setStatus(422);
             request.setAttribute("error", "Unprocessable Entity");
             requestDispatcher.forward(request, response);
             return;
         }
 
-        user.replace("firstName", firstName);
-        user.replace("lastName", lastName);
-        user.replace("email", email);
-
+        user.putAll(updatedUserData);
         response.sendRedirect("/users/show?id=" + id);
         // END
     }
