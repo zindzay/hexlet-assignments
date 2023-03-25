@@ -235,7 +235,7 @@ class AppTest {
 
     // BEGIN
     @Test
-    void testNewUser() throws IOException, ParseException {
+    void testNewUser() throws IOException {
         final var client = HttpClients.createDefault();
         final var getRequest = new HttpGet(baseUrl + "/users/new");
         final var response1 = client.execute(getRequest);
