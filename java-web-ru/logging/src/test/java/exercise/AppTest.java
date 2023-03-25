@@ -239,7 +239,6 @@ class AppTest {
         final var client = HttpClients.createDefault();
         final var getRequest = new HttpGet(baseUrl + "/users/new");
         final var response1 = client.execute(getRequest);
-
         assertThat(response1.getCode()).isEqualTo(200);
     }
     // END
