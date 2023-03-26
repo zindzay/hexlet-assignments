@@ -86,7 +86,7 @@ public final class ArticleController {
         final Long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
         final String title = ctx.formParam("title");
         final String body = ctx.formParam("body");
-        final String categoryId = ctx.formParam("categoryId");
+        final Long categoryId = ctx.formParamAsClass("categoryId", Long.class).getOrDefault(null);
 
         if (id == null) {
             ctx.res.sendError(HttpServletResponse.SC_BAD_REQUEST);
