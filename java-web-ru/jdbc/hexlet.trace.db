@@ -1,0 +1,20 @@
+2023-03-26 12:44:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"
+Syntax error in SQL statement "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"; SQL statement:
+SELECT id, title, body FROM articles WHERE id ? [42000-200]
+2023-03-26 12:44:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"
+Syntax error in SQL statement "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"; SQL statement:
+SELECT id, title, body FROM articles WHERE id ? [42000-200]
+2023-03-26 12:45:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"
+Syntax error in SQL statement "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"; SQL statement:
+SELECT id, title, body FROM articles WHERE id ? [42000-200]
+2023-03-26 12:45:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"
+Syntax error in SQL statement "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"; SQL statement:
+SELECT id, title, body FROM articles WHERE id ? [42000-200]
+2023-03-26 12:46:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"
+Syntax error in SQL statement "SELECT ID, TITLE, BODY FROM ARTICLES WHERE ID ?[*]"; SQL statement:
+SELECT id, title, body FROM articles WHERE id ? [42000-200]
