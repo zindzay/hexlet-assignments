@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,27 +111,22 @@ public class ArticlesServlet extends HttpServlet {
         // BEGIN
         final var id = Integer.parseInt(getId(request));
         final var query = "SELECT id, title, body FROM articles WHERE id = ?";
-        Map<String, String> article = Map.of();
+        final Map<String, String> article = new HashMap<>();
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
 
             ResultSet rs = statement.executeQuery();
 
-            while (rs.next()) {
-                article = Map.of(
-                        "id", rs.getString("id"),
-                        "title", rs.getString("title"),
-                        "body", rs.getString("body")
-                );
+            if (!rs.first()) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
             }
+
+            article.put("title", rs.getString("title"));
+            article.put("body", rs.getString("body"));
         } catch (SQLException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
-        }
-
-        if (article.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
