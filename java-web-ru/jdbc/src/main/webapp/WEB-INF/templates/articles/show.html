@@ -8,11 +8,11 @@ layout:decorate="~{layouts/application.html}">
 <section layout:fragment="content">
   <!-- BEGIN -->
   <h1>Article</h1>
-  <div class="card">
+  <div class="card" th:object="${article}">
     <ul class="list-group list-group-flush">
-      <li th:if="${article.id}" class="list-group-item" th:text="${article.id}"></li>
-      <li th:if="${article.title}" class="list-group-item" th:text="${article.title}"></li>
-      <li th:if="${article.body}" class="list-group-item" th:text="${article.body}"></li>
+      <li class="list-group-item" th:text="*{id}"></li>
+      <li class="list-group-item" th:text="*{title}"></li>
+      <li class="list-group-item" th:text="*{body}"></li>
     </ul>
   </div>
   <!-- END -->

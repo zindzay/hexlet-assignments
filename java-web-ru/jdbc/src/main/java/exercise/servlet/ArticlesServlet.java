@@ -70,13 +70,13 @@ public class ArticlesServlet extends HttpServlet {
         final int page = getPage(request);
         final var nextPage = page + 1;
         final var prevPage = page > 1 ? page - 1 : page;
-        final var limit = 10;
+        final var articlesPerPage = 10;
         final var offset = page * 10 - 10;
         final List<Map<String, String>> articles = new ArrayList<>();
         final var query = "SELECT id, title, body FROM articles ORDER BY id LIMIT ? OFFSET ?";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, limit);
+            statement.setInt(1, articlesPerPage);
             statement.setInt(2, offset);
 
             ResultSet rs = statement.executeQuery();
