@@ -1,6 +1,7 @@
 package exercise;
 
 import exercise.domain.User;
+import exercise.domain.query.QUser;
 import io.ebean.DB;
 import io.ebean.Database;
 import io.javalin.Javalin;
@@ -86,14 +87,14 @@ class AppTest {
 
         assertThat(responsePost.getStatus()).isEqualTo(302);
 
-        HttpResponse<String> responseGet = Unirest
-                .get(baseUrl + "/users")
-                .asString();
+        User actualUser = new QUser()
+                .lastName.equalTo(lastName)
+                .findOne();
 
-        String content = responseGet.getBody();
-        assertThat(content)
-                .contains("Aleksandr Vasiliev")
-                .contains("aleks@yandex.ru");
+        assertThat(actualUser).isNotNull();
+        assertThat(actualUser.getFirstName()).isEqualTo(firstName);
+        assertThat(actualUser.getLastName()).isEqualTo(lastName);
+        assertThat(actualUser.getEmail()).isEqualTo(email);
     }
 
     @Test
@@ -119,12 +120,11 @@ class AppTest {
                 .contains("Должно быть валидным email")
                 .contains("Пароль должен содержать не менее 4 символов");
 
-        HttpResponse<String> responseGet = Unirest
-                .get(baseUrl + "/users")
-                .asString();
+        User actualUser = new QUser()
+                .email.equalTo(email)
+                .findOne();
 
-        String content = responseGet.getBody();
-        assertThat(content).doesNotContain("jon");
+        assertThat(actualUser).isNull();
     }
     // END
 }
