@@ -15,7 +15,7 @@ public final class App {
 
     private static void addRoutes(Javalin app) {
 
-        app.get("/api/v1", ctx -> ctx.result("REST API"));
+        app.get("/", ctx -> ctx.result("REST API"));
 
         // BEGIN
         app.routes(() -> crud("/api/v1/users/{user-id}", new UserController()));

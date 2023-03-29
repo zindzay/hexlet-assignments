@@ -40,11 +40,11 @@ public class UserController implements CrudHandler {
         // BEGIN
 
         User user = ctx.bodyValidator(User.class)
-                .check(it -> !it.getFirstName().isEmpty(), "Имя не должно быть пустым")
-                .check(it -> !it.getLastName().isEmpty(), "Фамилия не должна быть пустой")
-                .check(it -> EmailValidator.getInstance().isValid(it.getEmail()), "Email должен быть валидным")
-                .check(it -> it.getPassword().length() >= 4 && StringUtils.isNumeric(it.getPassword()),
-                        "Пароль должен быть не короче 4 символов и содержать только цифры")
+                .check(it -> !it.getFirstName().isEmpty(), "First name can not be empty")
+                .check(it -> !it.getLastName().isEmpty(), "Last name can not be empty")
+                .check(it -> EmailValidator.getInstance().isValid(it.getEmail()), "Should be valid email")
+                .check(it -> StringUtils.isNumeric(it.getPassword()), "Password must contains only digits")
+                .check(it -> it.getPassword().length() >= 4, "Password must contain at least 4 characters")
                 .get();
 
         user.save();
