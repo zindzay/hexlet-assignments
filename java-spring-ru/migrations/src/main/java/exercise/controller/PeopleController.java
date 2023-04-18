@@ -32,9 +32,9 @@ public class PeopleController {
     }
 
     @GetMapping(path = "/{id}")
-    public List<Map<String, Object>> getPerson(@PathVariable String id) {
-        String query = "SELECT first_name, last_name FROM person ORDER BY ?;";
-        return jdbc.queryForList(query, id);
+    public Map<String, Object> getPerson(@PathVariable long id) {
+        String query = "SELECT first_name, last_name FROM person WHERE id=?";
+        return jdbc.queryForMap(query, id);
     }
     // END
 }
