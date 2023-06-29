@@ -90,24 +90,21 @@ public class UsersController {
     }
 
     // BEGIN
-    @Operation(summary = "Update user by his id")
+    @Operation(summary = "Update existing user")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User updated"),
         @ApiResponse(responseCode = "404", description = "User with that id not found")
     })
     @PatchMapping(path = "/{id}")
     public User updateUser(
-            @Parameter(description = "Id of user to be deleted")
+            @Parameter(description = "Id of user to be updated")
             @PathVariable long id,
             @Parameter(description = "User data to update")
-            @RequestBody UserDto userDto
-    ) {
-        if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException(id);
-        }
+            @RequestBody UserDto userDto) {
 
-        User user = new User();
-        user.setId(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
