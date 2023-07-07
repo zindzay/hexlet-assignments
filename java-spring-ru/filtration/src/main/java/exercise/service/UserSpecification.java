@@ -1,12 +1,11 @@
 package exercise.service;
 
 import exercise.model.User;
-import org.springframework.data.jpa.domain.Specification;
-
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.springframework.data.jpa.domain.Specification;
 
 public final class UserSpecification implements Specification<User> {
 
@@ -19,7 +18,10 @@ public final class UserSpecification implements Specification<User> {
     @Override
     public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         // BEGIN
-        return criteriaBuilder.equal(root.get(searchCriteria.getKey()), searchCriteria.getValue());
+        return criteriaBuilder.like(
+                criteriaBuilder.lower(root.get(searchCriteria.getKey())),
+                "%" + searchCriteria.getValue().toString().toLowerCase() + "%"
+        );
         // END
     }
 }
