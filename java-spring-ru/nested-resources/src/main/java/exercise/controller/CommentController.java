@@ -37,7 +37,7 @@ public class CommentController {
         Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId);
 
         if (comment == null) {
-            throw new ResourceNotFoundException("Comment not found by postId and commentId");
+            throw new ResourceNotFoundException("Comment not found");
         }
 
         return comment;
@@ -46,7 +46,7 @@ public class CommentController {
     @PostMapping(path = "/{postId}/comments")
     public Comment createCommentForPost(@PathVariable long postId, @RequestBody CommentDto commentDto) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new ResourceNotFoundException("Post not found by postId"));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
         Comment comment = new Comment();
         comment.setPost(post);
         comment.setContent(commentDto.content());
@@ -63,7 +63,7 @@ public class CommentController {
         Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId);
 
         if (comment == null) {
-            throw new ResourceNotFoundException("Comment not found by postId and commentId");
+            throw new ResourceNotFoundException("Comment not found");
         }
 
         comment.setContent(commentDto.content());
@@ -76,7 +76,7 @@ public class CommentController {
         Comment comment = commentRepository.findCommentByPostIdAndId(postId, commentId);
 
         if (comment == null) {
-            throw new ResourceNotFoundException("Comment not found by postId and commentId");
+            throw new ResourceNotFoundException("Comment not found");
         }
 
         commentRepository.delete(comment);
