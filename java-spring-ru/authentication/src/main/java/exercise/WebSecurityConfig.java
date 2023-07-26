@@ -23,11 +23,12 @@ public class WebSecurityConfig {
         // BEGIN
         http
                 .csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/").permitAll()
-                .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .anyRequest().authenticated()
-                .and().httpBasic();
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .httpBasic();
         return http.build();
         // END
     }

@@ -30,13 +30,13 @@ public class UserController {
 
     // BEGIN
     @PostMapping(path = "")
-    public void createUser(@RequestBody UserDto userDto) {
+    public User createUser(@RequestBody UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.username());
         user.setEmail(userDto.email());
         user.setPassword(encoder.encode(userDto.password()));
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
     // END
 }
