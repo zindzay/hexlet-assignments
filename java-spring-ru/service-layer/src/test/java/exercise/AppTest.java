@@ -31,32 +31,32 @@ public class AppTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-//    @Test
-//    void testAllCities() throws Exception {
-//
-//        MockHttpServletResponse response = mockMvc
-//            .perform(get("/search"))
-//            .andReturn()
-//            .getResponse();
-//
-//        assertThat(response.getStatus()).isEqualTo(200);
-//        assertThat(response.getContentType()).isEqualTo(MediaType.APPLICATION_JSON.toString());
-//
-//
-//        List<Map<String, String>> actualCities = objectMapper.readValue(
-//            response.getContentAsString(),
-//            new TypeReference<List<Map<String, String>>>() { }
-//        );
-//
-//        // Проверяем, что без фильтра вернулся полный список городов
-//        assertThat(actualCities.size()).isEqualTo(5);
-//
-//        // Проверяем, что города отсортированы по имени
-//        Map<String, String> city = actualCities.get(0);
-//        assertThat(city.get("name")).isEqualTo("Bagdad");
-//        // Проверяем, что данные содержат температуру в городе
-//        assertThat(StringUtils.isNumeric(city.get("temperature"))).isTrue();
-//    }
+    @Test
+    void testAllCities() throws Exception {
+
+        MockHttpServletResponse response = mockMvc
+            .perform(get("/search"))
+            .andReturn()
+            .getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(200);
+        assertThat(response.getContentType()).isEqualTo(MediaType.APPLICATION_JSON.toString());
+
+
+        List<Map<String, String>> actualCities = objectMapper.readValue(
+            response.getContentAsString(),
+            new TypeReference<List<Map<String, String>>>() { }
+        );
+
+        // Проверяем, что без фильтра вернулся полный список городов
+        assertThat(actualCities.size()).isEqualTo(5);
+
+        // Проверяем, что города отсортированы по имени
+        Map<String, String> city = actualCities.get(0);
+        assertThat(city.get("name")).isEqualTo("Bagdad");
+        // Проверяем, что данные содержат температуру в городе
+        assertThat(StringUtils.isNumeric(city.get("temperature"))).isTrue();
+    }
 
     @Test
     void testFilteredCities() throws Exception {
