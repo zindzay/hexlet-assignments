@@ -15,7 +15,7 @@ public class WelcomeController {
 
     @GetMapping("/daytime")
     public String getGreeting() {
-        var time = daytime.getName();
+        String time = daytime.getName();
         return "It is " + time + " now. " + "Enjoy your " + meal.getMealForDaytime(time);
     }
 }
