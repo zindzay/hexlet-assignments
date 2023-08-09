@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class WelcomeController {
-    private Meal meal;
+    private final Daytime daytime;
 
-    private Daytime daytime;
+    private final Meal meal;
 
     @GetMapping("/daytime")
     public String getGreeting() {
