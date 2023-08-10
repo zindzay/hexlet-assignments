@@ -16,37 +16,45 @@ import java.util.Map;
 public class CustomBeanPostProcessor implements BeanPostProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomBeanPostProcessor.class);
 
-    private static final Map<Class<?>, String> BEEN_BY_LEVEL = new HashMap<>();
+    private Map<String, Class<?>> annotatedBeans = new HashMap<>();
+    private Map<String, String> loggingLevels = new HashMap<>();
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if (!bean.getClass().isAnnotationPresent(Inspect.class)) {
-            return bean;
-        }
+        if (bean.getClass().isAnnotationPresent(Inspect.class)) {
+            String level = bean.getClass().getAnnotation(Inspect.class).level();
 
-        BEEN_BY_LEVEL.put(bean.getClass(), bean.getClass().getAnnotation(Inspect.class).level());
+            annotatedBeans.put(beanName, bean.getClass());
+            loggingLevels.put(beanName, level);
+        }
 
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        BEEN_BY_LEVEL.forEach((key, value) -> Proxy.newProxyInstance(
-                key.getClassLoader(),
-                key.getInterfaces(),
-                ((proxy, method, args) -> {
-                    String message = "Was called method: "
-                            + method.getName() + " with arguments: " + Arrays.toString(args);
-                    if (value.equals("info")) {
-                        LOGGER.info(message);
-                    } else {
-                        LOGGER.debug(message);
-                    }
-                    return proxy;
-                })
-        ));
+        if (!annotatedBeans.containsKey(beanName)) {
+            return bean;
+        }
 
-        return bean;
+        Class<?> beanClass = annotatedBeans.get(beanName);
+        String level = loggingLevels.get(beanName);
+
+        return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
+            String message = String.format(
+                    "Was called method: %s() with arguments: %s",
+                    method.getName(),
+                    Arrays.toString(args)
+            );
+
+            if ("info".equals(level)) {
+                LOGGER.info(message);
+            } else {
+                LOGGER.debug(message);
+            }
+
+            return method.invoke(bean, args);
+        });
     }
 }
 // END
