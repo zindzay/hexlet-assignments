@@ -14,10 +14,10 @@ public class ListThread extends Thread {
         for (int i = 0; i < 1000; i++) {
             try {
                 Thread.sleep(1);
-                safetyList.add(i);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
+            safetyList.add(i);
         }
     }
 }

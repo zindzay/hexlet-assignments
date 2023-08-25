@@ -2,7 +2,7 @@ package exercise;
 
 class App {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         // BEGIN
         final SafetyList safetyList = new SafetyList();
 
@@ -12,10 +12,14 @@ class App {
         listThread1.start();
         listThread2.start();
 
-        listThread1.join();
-        listThread2.join();
+        try {
+            listThread1.join();
+            listThread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println(safetyList.getSize());
+        System.out.println("Size: " + safetyList.getSize());
         // END
     }
 }
