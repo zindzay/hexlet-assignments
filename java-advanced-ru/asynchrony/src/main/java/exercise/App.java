@@ -81,9 +81,10 @@ class App {
                 "src/main/resources/file2.txt",
                 "src/main/resources/dest.txt"
         );
-        CompletableFuture<Long> size = getDirectorySize("src/main/resources");
         result.get();
         System.out.println("done!");
+
+        CompletableFuture<Long> size = getDirectorySize("src/main/resources");
         System.out.println(size.get());
         // END
     }
